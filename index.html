@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="instagram:card" content="summary">
   <title>For Abby 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=DM+Sans:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
@@ -220,10 +219,10 @@
     .carta-container {
       position:relative;
       width:100%;
-      max-width:420px;
+      max-width:480px;
       margin:0 auto;
       perspective:1200px;
-      min-height: 480px;
+      min-height: 380px;
     }
     .sobre {
       width:100%;
@@ -315,20 +314,6 @@
       margin-top:4px;
     }
 
-    /* Fallback para Instagram y visores web */
-    .carta-contenido {
-      display: flex !important;
-    }
-    .sobre .carta-contenido {
-      position: relative !important;
-      transform: none !important;
-      backface-visibility: visible !important;
-      background: transparent !important;
-    }
-    .sobre.abierto .carta-contenido {
-      display: flex !important;
-    }
-
     @keyframes float {
       0%,100%{ transform:translateY(0); }
       50%{ transform:translateY(-10px); }
@@ -367,6 +352,66 @@
       font-size:13px;
       letter-spacing:1px;
       text-align:right;
+    }
+
+    /* Poema */
+    .poema-wrap {
+      background: linear-gradient(180deg, #1c0a26 0%, #0d0212 100%);
+      padding: 30px 0 50px;
+    }
+    .poema-inner {
+      max-width:480px; margin:0 auto; padding:0 24px; text-align:center;
+    }
+    .poema-card {
+      background: rgba(255,255,255,0.03);
+      border: .5px solid rgba(167,138,217,0.2);
+      border-radius: 28px;
+      padding: 32px 24px;
+      position:relative;
+      overflow:hidden;
+      opacity:0; transform:translateY(24px);
+      transition: opacity .8s .2s, transform .8s .2s;
+    }
+    .poema-card.visible { opacity:1; transform:translateY(0); }
+    .poema-card::before {
+      content:'✨';
+      position:absolute;
+      top:10px; left:16px;
+      font-size:32px;
+      opacity:.15;
+    }
+    .poema-card::after {
+      content:'✨';
+      position:absolute;
+      bottom:10px; right:16px;
+      font-size:32px;
+      opacity:.15;
+    }
+    .poema-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-style:italic;
+      font-size: clamp(18px, 4.5vw, 24px);
+      line-height: 2.2;
+      color: #e8daf5;
+      padding: 4px 0;
+      opacity:0;
+      transform:translateY(15px);
+      transition: opacity .6s, transform .6s;
+    }
+    .poema-line.visible { opacity:1; transform:translateY(0); }
+    .poema-line:nth-child(1){ transition-delay:.1s; }
+    .poema-line:nth-child(2){ transition-delay:.25s; }
+    .poema-line:nth-child(3){ transition-delay:.4s; }
+    .poema-line:nth-child(4){ transition-delay:.55s; }
+    .poema-line:nth-child(5){ transition-delay:.7s; }
+    .poema-line:nth-child(6){ transition-delay:.85s; }
+    .poema-line .highlight {
+      color: #f7a1c4;
+      font-weight:600;
+    }
+    .poema-line .highlight2 {
+      color: #c9b0f0;
+      font-weight:600;
     }
 
     .wishes-grid {
@@ -461,29 +506,14 @@
     }
 
     @keyframes riseUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes pulseRing {
+      0%,100%{ box-shadow:0 0 0 0 rgba(167,138,217,0.3), inset 0 0 20px rgba(167,138,217,0.1); }
+      50%{ box-shadow:0 0 0 16px rgba(167,138,217,0), inset 0 0 20px rgba(167,138,217,0.1); }
+    }
     @keyframes dotBounce { 0%,100%{opacity:.2;transform:translateY(0)} 50%{opacity:1;transform:translateY(4px)} }
-
-    /* Fallback para cuando no carga el CSS completo */
-    .fallback-content {
-      display: none;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; }
-    }
   </style>
 </head>
 <body>
-
-<!-- Fallback para Instagram -->
-<noscript>
-  <div style="padding:40px; text-align:center; font-family:Arial, sans-serif; color:#f5edf8; background:#0d0212; min-height:100vh;">
-    <h1 style="color:#f7a1c4; font-size:32px;">💖 For Abby</h1>
-    <p style="font-size:18px; margin:20px 0; line-height:1.8;">I made this because I wanted to thank you somehow for always being with me. I really enjoy spending time with you, whether it's playing Roblox, chatting on Instagram, or even being on a call without saying anything, just keeping me company during the night. I really like it, I feel comfortable with you, and I'm very grateful for all those good moments we've shared together. You're special to me.</p>
-    <p style="color:#f7a1c4; font-size:20px;">With love ❤️</p>
-    <p style="margin-top:30px; font-size:14px; color:#a78ad9;">✨ Open this link in your browser for the full experience ✨</p>
-  </div>
-</noscript>
-
 <canvas id="cvs"></canvas>
 
 <div class="floating-hearts">
@@ -496,143 +526,185 @@
 
   <!-- HERO -->
   <section class="hero">
+    <br><br><br><br>
     <div class="hero-tag">✦ for you, abby ✦</div>
     <div class="hero-hb">Thank You</div>
     <div class="hero-name">Abby</div>
     <br>
-    <div style="margin-bottom:14px; opacity:0; animation: riseUp .9s .28s ease forwards;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="260" height="185">
-        <defs>
-          <style>
-            @keyframes bloom{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.1) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0deg);opacity:1}}
-            @keyframes stemGrow{0%{stroke-dashoffset:120}100%{stroke-dashoffset:0}}
-            @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
-            @keyframes twinkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
-            .st{stroke:#5a8a3c;stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:120;animation:stemGrow .8s ease forwards;}
-            .sw{animation:sway 3s ease-in-out infinite;}
-            .rp{transform-origin:180px 95px;animation:bloom .6s ease forwards;opacity:0}
-            .rp1{animation-delay:.8s} .rp2{animation-delay:.95s} .rp3{animation-delay:1.1s}
-            .rp4{animation-delay:1.25s} .rp5{animation-delay:1.4s} .rp6{animation-delay:1.55s}
-            .rp7{animation-delay:1.7s} .rp8{animation-delay:1.85s}
-            .lp{transform-origin:120px 100px;animation:bloom .5s ease forwards;opacity:0}
-            .lp1{animation-delay:1s} .lp2{animation-delay:1.15s} .lp3{animation-delay:1.3s}
-            .lp4{animation-delay:1.45s} .lp5{animation-delay:1.6s} .lp6{animation-delay:1.75s}
-            .yp{transform-origin:245px 88px;animation:bloom .5s ease forwards;opacity:0}
-            .yp1{animation-delay:1.2s} .yp2{animation-delay:1.35s} .yp3{animation-delay:1.5s}
-            .yp4{animation-delay:1.65s} .yp5{animation-delay:1.8s} .yp6{animation-delay:1.95s}
-            .cp{transform-origin:88px 118px;animation:bloom .5s ease forwards;opacity:0}
-            .cp1{animation-delay:1.4s} .cp2{animation-delay:1.55s} .cp3{animation-delay:1.7s}
-            .cp4{animation-delay:1.85s} .cp5{animation-delay:2s}
-            .wp{transform-origin:278px 112px;animation:bloom .5s ease forwards;opacity:0}
-            .wp1{animation-delay:1.5s} .wp2{animation-delay:1.65s} .wp3{animation-delay:1.8s}
-            .wp4{animation-delay:1.95s} .wp5{animation-delay:2.1s}
-            .mp{transform-origin:155px 130px;animation:bloom .4s ease forwards;opacity:0}
-            .mp1{animation-delay:1.8s} .mp2{animation-delay:1.95s} .mp3{animation-delay:2.1s} .mp4{animation-delay:2.25s}
-            .op{transform-origin:210px 122px;animation:bloom .4s ease forwards;opacity:0}
-            .op1{animation-delay:1.9s} .op2{animation-delay:2.05s} .op3{animation-delay:2.2s} .op4{animation-delay:2.35s}
-            .tw{animation:twinkle 2s ease-in-out infinite;}
-            .tw1{animation-delay:2.5s} .tw2{animation-delay:3s} .tw3{animation-delay:3.5s} .tw4{animation-delay:2.8s} .tw5{animation-delay:3.2s}
-            .leaf{opacity:0;animation:bloom .5s ease forwards;}
-            .l1{animation-delay:1.6s;transform-origin:165px 170px}
-            .l2{animation-delay:1.7s;transform-origin:195px 165px}
-            .l3{animation-delay:1.9s;transform-origin:148px 185px}
-            .l4{animation-delay:2s;transform-origin:208px 180px}
-            .ribbon{opacity:0;animation:bloom .4s 2.3s ease forwards;}
-          </style>
-        </defs>
-        <g style="animation-delay:.1s">
-          <path class="st" d="M180 210 Q176 170 180 95" style="animation-delay:.1s"/>
-          <path class="st" d="M180 210 Q162 175 120 100" style="animation-delay:.2s"/>
-          <path class="st" d="M180 210 Q198 172 245 88" style="animation-delay:.3s"/>
-          <path class="st" d="M180 210 Q148 180 88 118" style="animation-delay:.4s"/>
-          <path class="st" d="M180 210 Q212 178 278 112" style="animation-delay:.5s"/>
-          <path class="st" d="M180 210 Q170 185 155 130" style="animation-delay:.6s"/>
-          <path class="st" d="M180 210 Q190 182 210 122" style="animation-delay:.65s"/>
-        </g>
-        <ellipse class="leaf l1" cx="165" cy="170" rx="13" ry="5" fill="#5a9e3a" transform="rotate(-40 165 170)"/>
-        <ellipse class="leaf l2" cx="195" cy="165" rx="12" ry="5" fill="#4a8e2a" transform="rotate(35 195 165)"/>
-        <ellipse class="leaf l3" cx="148" cy="185" rx="11" ry="4" fill="#5a9e3a" transform="rotate(-55 148 185)"/>
-        <ellipse class="leaf l4" cx="208" cy="180" rx="11" ry="4" fill="#4a8e2a" transform="rotate(50 208 180)"/>
-        <g class="sw" style="transform-origin:180px 95px">
-          <ellipse class="rp rp1" cx="180" cy="78" rx="7" ry="11" fill="#f7a1c4"/>
-          <ellipse class="rp rp2" cx="180" cy="112" rx="7" ry="11" fill="#f7a1c4"/>
-          <ellipse class="rp rp3" cx="163" cy="95" rx="11" ry="7" fill="#f7a1c4"/>
-          <ellipse class="rp rp4" cx="197" cy="95" rx="11" ry="7" fill="#f7a1c4"/>
-          <ellipse class="rp rp5" cx="168" cy="82" rx="9" ry="10" fill="#f48fb8" transform="rotate(-45 168 82)"/>
-          <ellipse class="rp rp6" cx="192" cy="82" rx="9" ry="10" fill="#f48fb8" transform="rotate(45 192 82)"/>
-          <ellipse class="rp rp7" cx="168" cy="108" rx="9" ry="10" fill="#f48fb8" transform="rotate(45 168 108)"/>
-          <ellipse class="rp rp8" cx="192" cy="108" rx="9" ry="10" fill="#f48fb8" transform="rotate(-45 192 108)"/>
-          <circle cx="180" cy="95" r="9" fill="#e05590"/>
-          <circle cx="180" cy="95" r="5" fill="#c0366e"/>
-          <circle cx="180" cy="95" r="2.5" fill="#ff9cc0" opacity=".6"/>
-        </g>
-        <g class="sw" style="transform-origin:120px 100px;animation-delay:.4s">
-          <ellipse class="lp lp1" cx="120" cy="86" rx="6" ry="9" fill="#c9b0f0"/>
-          <ellipse class="lp lp2" cx="120" cy="114" rx="6" ry="9" fill="#c9b0f0"/>
-          <ellipse class="lp lp3" cx="106" cy="100" rx="9" ry="6" fill="#c9b0f0"/>
-          <ellipse class="lp lp4" cx="134" cy="100" rx="9" ry="6" fill="#c9b0f0"/>
-          <ellipse class="lp lp5" cx="109" cy="89" rx="8" ry="7" fill="#b09ae0" transform="rotate(-45 109 89)"/>
-          <ellipse class="lp lp6" cx="131" cy="89" rx="8" ry="7" fill="#b09ae0" transform="rotate(45 131 89)"/>
-          <circle cx="120" cy="100" r="7" fill="#9070c8"/>
-          <circle cx="120" cy="100" r="3.5" fill="#fff" opacity=".5"/>
-        </g>
-        <g class="sw" style="transform-origin:245px 88px;animation-delay:.3s">
-          <ellipse class="yp yp1" cx="245" cy="74" rx="6" ry="9" fill="#fde84a"/>
-          <ellipse class="yp yp2" cx="245" cy="102" rx="6" ry="9" fill="#fde84a"/>
-          <ellipse class="yp yp3" cx="231" cy="88" rx="9" ry="6" fill="#fde84a"/>
-          <ellipse class="yp yp4" cx="259" cy="88" rx="9" ry="6" fill="#fde84a"/>
-          <ellipse class="yp yp5" cx="234" cy="77" rx="8" ry="7" fill="#f5c820" transform="rotate(-45 234 77)"/>
-          <ellipse class="yp yp6" cx="256" cy="77" rx="8" ry="7" fill="#f5c820" transform="rotate(45 256 77)"/>
-          <circle cx="245" cy="88" r="7" fill="#e0980a"/>
-          <circle cx="245" cy="88" r="3.5" fill="#fff8d0" opacity=".7"/>
-        </g>
-        <g class="sw" style="transform-origin:88px 118px;animation-delay:.6s">
-          <ellipse class="cp cp1" cx="88" cy="106" rx="5" ry="8" fill="#ff9a7a"/>
-          <ellipse class="cp cp2" cx="88" cy="130" rx="5" ry="8" fill="#ff9a7a"/>
-          <ellipse class="cp cp3" cx="76" cy="118" rx="8" ry="5" fill="#ff9a7a"/>
-          <ellipse class="cp cp4" cx="100" cy="118" rx="8" ry="5" fill="#ff9a7a"/>
-          <ellipse class="cp cp5" cx="78" cy="108" rx="7" ry="6" fill="#ff7a55" transform="rotate(-45 78 108)"/>
-          <circle cx="88" cy="118" r="6" fill="#e05030"/>
-          <circle cx="88" cy="118" r="3" fill="#fff" opacity=".4"/>
-        </g>
-        <g class="sw" style="transform-origin:278px 112px;animation-delay:.5s">
-          <ellipse class="wp wp1" cx="278" cy="100" rx="5" ry="8" fill="#fff" opacity=".9"/>
-          <ellipse class="wp wp2" cx="278" cy="124" rx="5" ry="8" fill="#fff" opacity=".9"/>
-          <ellipse class="wp wp3" cx="266" cy="112" rx="8" ry="5" fill="#fff" opacity=".9"/>
-          <ellipse class="wp wp4" cx="290" cy="112" rx="8" ry="5" fill="#fff" opacity=".9"/>
-          <ellipse class="wp wp5" cx="268" cy="102" rx="7" ry="6" fill="#f0f0ff" transform="rotate(-45 268 102)"/>
-          <circle cx="278" cy="112" r="6" fill="#f0d060"/>
-          <circle cx="278" cy="112" r="2.5" fill="#fff" opacity=".6"/>
-        </g>
-        <g class="sw" style="transform-origin:155px 130px;animation-delay:.7s">
-          <ellipse class="mp mp1" cx="155" cy="121" rx="4" ry="6" fill="#d090f0"/>
-          <ellipse class="mp mp2" cx="155" cy="139" rx="4" ry="6" fill="#d090f0"/>
-          <ellipse class="mp mp3" cx="146" cy="130" rx="6" ry="4" fill="#d090f0"/>
-          <ellipse class="mp mp4" cx="164" cy="130" rx="6" ry="4" fill="#d090f0"/>
-          <circle cx="155" cy="130" r="5" fill="#9040c0"/>
-          <circle cx="155" cy="130" r="2.5" fill="#f0d0ff" opacity=".6"/>
-        </g>
-        <g class="sw" style="transform-origin:210px 122px;animation-delay:.65s">
-          <ellipse class="op op1" cx="210" cy="113" rx="4" ry="6" fill="#ffb050"/>
-          <ellipse class="op op2" cx="210" cy="131" rx="4" ry="6" fill="#ffb050"/>
-          <ellipse class="op op3" cx="201" cy="122" rx="6" ry="4" fill="#ffb050"/>
-          <ellipse class="op op4" cx="219" cy="122" rx="6" ry="4" fill="#ffb050"/>
-          <circle cx="210" cy="122" r="5" fill="#e06010"/>
-          <circle cx="210" cy="122" r="2.5" fill="#fff8e0" opacity=".6"/>
-        </g>
-        <g class="ribbon">
-          <path d="M168 215 Q158 205 162 197 Q169 193 173 202 Q176 207 180 210" fill="#f7a1c4" opacity=".85"/>
-          <path d="M192 215 Q202 205 198 197 Q191 193 187 202 Q184 207 180 210" fill="#f7a1c4" opacity=".85"/>
-          <ellipse cx="180" cy="211" rx="6" ry="5" fill="#e87db0"/>
-          <path d="M166 214 Q180 222 194 214" stroke="#f7a1c4" stroke-width="1.5" fill="none" opacity=".6"/>
-        </g>
-        <g class="tw tw1"><text x="100" y="70" font-size="11" fill="#f5c842">✦</text></g>
-        <g class="tw tw2"><text x="255" y="65" font-size="9" fill="#c9b0f0">✦</text></g>
-        <g class="tw tw3"><text x="295" y="95" font-size="8" fill="#f7a1c4">✦</text></g>
-        <g class="tw tw4"><text x="70" y="100" font-size="9" fill="#fff">✦</text></g>
-        <g class="tw tw5"><text x="175" y="68" font-size="8" fill="#f5c842">✦</text></g>
-      </svg>
-    </div>
+<div style="margin-bottom:14px; opacity:0; animation: riseUp .9s .28s ease forwards;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="260" height="185">
+<defs>
+  <style>
+    @keyframes bloom{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.1) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0deg);opacity:1}}
+    @keyframes stemGrow{0%{stroke-dashoffset:120}100%{stroke-dashoffset:0}}
+    @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+    @keyframes twinkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+
+    .st{stroke:#5a8a3c;stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:120;animation:stemGrow .8s ease forwards;}
+    .sw{animation:sway 3s ease-in-out infinite;}
+
+    /* Rosa */
+    .rp{transform-origin:180px 95px;animation:bloom .6s ease forwards;opacity:0}
+    .rp1{animation-delay:.8s} .rp2{animation-delay:.95s} .rp3{animation-delay:1.1s}
+    .rp4{animation-delay:1.25s} .rp5{animation-delay:1.4s} .rp6{animation-delay:1.55s}
+    .rp7{animation-delay:1.7s} .rp8{animation-delay:1.85s}
+
+    /* Lavanda */
+    .lp{transform-origin:120px 100px;animation:bloom .5s ease forwards;opacity:0}
+    .lp1{animation-delay:1s} .lp2{animation-delay:1.15s} .lp3{animation-delay:1.3s}
+    .lp4{animation-delay:1.45s} .lp5{animation-delay:1.6s} .lp6{animation-delay:1.75s}
+
+    /* Amarilla */
+    .yp{transform-origin:245px 88px;animation:bloom .5s ease forwards;opacity:0}
+    .yp1{animation-delay:1.2s} .yp2{animation-delay:1.35s} .yp3{animation-delay:1.5s}
+    .yp4{animation-delay:1.65s} .yp5{animation-delay:1.8s} .yp6{animation-delay:1.95s}
+
+    /* Coral pequeña izq */
+    .cp{transform-origin:88px 118px;animation:bloom .5s ease forwards;opacity:0}
+    .cp1{animation-delay:1.4s} .cp2{animation-delay:1.55s} .cp3{animation-delay:1.7s}
+    .cp4{animation-delay:1.85s} .cp5{animation-delay:2s}
+
+    /* Blanca pequeña der */
+    .wp{transform-origin:278px 112px;animation:bloom .5s ease forwards;opacity:0}
+    .wp1{animation-delay:1.5s} .wp2{animation-delay:1.65s} .wp3{animation-delay:1.8s}
+    .wp4{animation-delay:1.95s} .wp5{animation-delay:2.1s}
+
+    /* Morada mini */
+    .mp{transform-origin:155px 130px;animation:bloom .4s ease forwards;opacity:0}
+    .mp1{animation-delay:1.8s} .mp2{animation-delay:1.95s} .mp3{animation-delay:2.1s} .mp4{animation-delay:2.25s}
+
+    /* Naranja mini */
+    .op{transform-origin:210px 122px;animation:bloom .4s ease forwards;opacity:0}
+    .op1{animation-delay:1.9s} .op2{animation-delay:2.05s} .op3{animation-delay:2.2s} .op4{animation-delay:2.35s}
+
+    .tw{animation:twinkle 2s ease-in-out infinite;}
+    .tw1{animation-delay:2.5s} .tw2{animation-delay:3s} .tw3{animation-delay:3.5s} .tw4{animation-delay:2.8s} .tw5{animation-delay:3.2s}
+
+    .leaf{opacity:0;animation:bloom .5s ease forwards;}
+    .l1{animation-delay:1.6s;transform-origin:165px 170px}
+    .l2{animation-delay:1.7s;transform-origin:195px 165px}
+    .l3{animation-delay:1.9s;transform-origin:148px 185px}
+    .l4{animation-delay:2s;transform-origin:208px 180px}
+
+    .ribbon{opacity:0;animation:bloom .4s 2.3s ease forwards;}
+  </style>
+</defs>
+
+<!-- Tallos -->
+<g style="animation-delay:.1s">
+  <path class="st" d="M180 210 Q176 170 180 95" style="animation-delay:.1s"/>
+  <path class="st" d="M180 210 Q162 175 120 100" style="animation-delay:.2s"/>
+  <path class="st" d="M180 210 Q198 172 245 88" style="animation-delay:.3s"/>
+  <path class="st" d="M180 210 Q148 180 88 118" style="animation-delay:.4s"/>
+  <path class="st" d="M180 210 Q212 178 278 112" style="animation-delay:.5s"/>
+  <path class="st" d="M180 210 Q170 185 155 130" style="animation-delay:.6s"/>
+  <path class="st" d="M180 210 Q190 182 210 122" style="animation-delay:.65s"/>
+</g>
+
+<!-- Hojas -->
+<ellipse class="leaf l1" cx="165" cy="170" rx="13" ry="5" fill="#5a9e3a" transform="rotate(-40 165 170)"/>
+<ellipse class="leaf l2" cx="195" cy="165" rx="12" ry="5" fill="#4a8e2a" transform="rotate(35 195 165)"/>
+<ellipse class="leaf l3" cx="148" cy="185" rx="11" ry="4" fill="#5a9e3a" transform="rotate(-55 148 185)"/>
+<ellipse class="leaf l4" cx="208" cy="180" rx="11" ry="4" fill="#4a8e2a" transform="rotate(50 208 180)"/>
+
+<!-- ROSA CENTRAL (8 pétalos, abre de adentro hacia afuera) -->
+<g class="sw" style="transform-origin:180px 95px">
+  <ellipse class="rp rp1" cx="180" cy="78" rx="7" ry="11" fill="#f7a1c4"/>
+  <ellipse class="rp rp2" cx="180" cy="112" rx="7" ry="11" fill="#f7a1c4"/>
+  <ellipse class="rp rp3" cx="163" cy="95" rx="11" ry="7" fill="#f7a1c4"/>
+  <ellipse class="rp rp4" cx="197" cy="95" rx="11" ry="7" fill="#f7a1c4"/>
+  <ellipse class="rp rp5" cx="168" cy="82" rx="9" ry="10" fill="#f48fb8" transform="rotate(-45 168 82)"/>
+  <ellipse class="rp rp6" cx="192" cy="82" rx="9" ry="10" fill="#f48fb8" transform="rotate(45 192 82)"/>
+  <ellipse class="rp rp7" cx="168" cy="108" rx="9" ry="10" fill="#f48fb8" transform="rotate(45 168 108)"/>
+  <ellipse class="rp rp8" cx="192" cy="108" rx="9" ry="10" fill="#f48fb8" transform="rotate(-45 192 108)"/>
+  <circle cx="180" cy="95" r="9" fill="#e05590"/>
+  <circle cx="180" cy="95" r="5" fill="#c0366e"/>
+  <circle cx="180" cy="95" r="2.5" fill="#ff9cc0" opacity=".6"/>
+</g>
+
+<!-- LAVANDA izquierda (6 pétalos) -->
+<g class="sw" style="transform-origin:120px 100px;animation-delay:.4s">
+  <ellipse class="lp lp1" cx="120" cy="86" rx="6" ry="9" fill="#c9b0f0"/>
+  <ellipse class="lp lp2" cx="120" cy="114" rx="6" ry="9" fill="#c9b0f0"/>
+  <ellipse class="lp lp3" cx="106" cy="100" rx="9" ry="6" fill="#c9b0f0"/>
+  <ellipse class="lp lp4" cx="134" cy="100" rx="9" ry="6" fill="#c9b0f0"/>
+  <ellipse class="lp lp5" cx="109" cy="89" rx="8" ry="7" fill="#b09ae0" transform="rotate(-45 109 89)"/>
+  <ellipse class="lp lp6" cx="131" cy="89" rx="8" ry="7" fill="#b09ae0" transform="rotate(45 131 89)"/>
+  <circle cx="120" cy="100" r="7" fill="#9070c8"/>
+  <circle cx="120" cy="100" r="3.5" fill="#fff" opacity=".5"/>
+</g>
+
+<!-- AMARILLA derecha (6 pétalos) -->
+<g class="sw" style="transform-origin:245px 88px;animation-delay:.3s">
+  <ellipse class="yp yp1" cx="245" cy="74" rx="6" ry="9" fill="#fde84a"/>
+  <ellipse class="yp yp2" cx="245" cy="102" rx="6" ry="9" fill="#fde84a"/>
+  <ellipse class="yp yp3" cx="231" cy="88" rx="9" ry="6" fill="#fde84a"/>
+  <ellipse class="yp yp4" cx="259" cy="88" rx="9" ry="6" fill="#fde84a"/>
+  <ellipse class="yp yp5" cx="234" cy="77" rx="8" ry="7" fill="#f5c820" transform="rotate(-45 234 77)"/>
+  <ellipse class="yp yp6" cx="256" cy="77" rx="8" ry="7" fill="#f5c820" transform="rotate(45 256 77)"/>
+  <circle cx="245" cy="88" r="7" fill="#e0980a"/>
+  <circle cx="245" cy="88" r="3.5" fill="#fff8d0" opacity=".7"/>
+</g>
+
+<!-- CORAL pequeña izq (5 pétalos) -->
+<g class="sw" style="transform-origin:88px 118px;animation-delay:.6s">
+  <ellipse class="cp cp1" cx="88" cy="106" rx="5" ry="8" fill="#ff9a7a"/>
+  <ellipse class="cp cp2" cx="88" cy="130" rx="5" ry="8" fill="#ff9a7a"/>
+  <ellipse class="cp cp3" cx="76" cy="118" rx="8" ry="5" fill="#ff9a7a"/>
+  <ellipse class="cp cp4" cx="100" cy="118" rx="8" ry="5" fill="#ff9a7a"/>
+  <ellipse class="cp cp5" cx="78" cy="108" rx="7" ry="6" fill="#ff7a55" transform="rotate(-45 78 108)"/>
+  <circle cx="88" cy="118" r="6" fill="#e05030"/>
+  <circle cx="88" cy="118" r="3" fill="#fff" opacity=".4"/>
+</g>
+
+<!-- BLANCA pequeña der (5 pétalos) -->
+<g class="sw" style="transform-origin:278px 112px;animation-delay:.5s">
+  <ellipse class="wp wp1" cx="278" cy="100" rx="5" ry="8" fill="#fff" opacity=".9"/>
+  <ellipse class="wp wp2" cx="278" cy="124" rx="5" ry="8" fill="#fff" opacity=".9"/>
+  <ellipse class="wp wp3" cx="266" cy="112" rx="8" ry="5" fill="#fff" opacity=".9"/>
+  <ellipse class="wp wp4" cx="290" cy="112" rx="8" ry="5" fill="#fff" opacity=".9"/>
+  <ellipse class="wp wp5" cx="268" cy="102" rx="7" ry="6" fill="#f0f0ff" transform="rotate(-45 268 102)"/>
+  <circle cx="278" cy="112" r="6" fill="#f0d060"/>
+  <circle cx="278" cy="112" r="2.5" fill="#fff" opacity=".6"/>
+</g>
+
+<!-- MORADA mini (4 pétalos) -->
+<g class="sw" style="transform-origin:155px 130px;animation-delay:.7s">
+  <ellipse class="mp mp1" cx="155" cy="121" rx="4" ry="6" fill="#d090f0"/>
+  <ellipse class="mp mp2" cx="155" cy="139" rx="4" ry="6" fill="#d090f0"/>
+  <ellipse class="mp mp3" cx="146" cy="130" rx="6" ry="4" fill="#d090f0"/>
+  <ellipse class="mp mp4" cx="164" cy="130" rx="6" ry="4" fill="#d090f0"/>
+  <circle cx="155" cy="130" r="5" fill="#9040c0"/>
+  <circle cx="155" cy="130" r="2.5" fill="#f0d0ff" opacity=".6"/>
+</g>
+
+<!-- NARANJA mini (4 pétalos) -->
+<g class="sw" style="transform-origin:210px 122px;animation-delay:.65s">
+  <ellipse class="op op1" cx="210" cy="113" rx="4" ry="6" fill="#ffb050"/>
+  <ellipse class="op op2" cx="210" cy="131" rx="4" ry="6" fill="#ffb050"/>
+  <ellipse class="op op3" cx="201" cy="122" rx="6" ry="4" fill="#ffb050"/>
+  <ellipse class="op op4" cx="219" cy="122" rx="6" ry="4" fill="#ffb050"/>
+  <circle cx="210" cy="122" r="5" fill="#e06010"/>
+  <circle cx="210" cy="122" r="2.5" fill="#fff8e0" opacity=".6"/>
+</g>
+
+<!-- Moño -->
+<g class="ribbon">
+  <path d="M168 215 Q158 205 162 197 Q169 193 173 202 Q176 207 180 210" fill="#f7a1c4" opacity=".85"/>
+  <path d="M192 215 Q202 205 198 197 Q191 193 187 202 Q184 207 180 210" fill="#f7a1c4" opacity=".85"/>
+  <ellipse cx="180" cy="211" rx="6" ry="5" fill="#e87db0"/>
+  <path d="M166 214 Q180 222 194 214" stroke="#f7a1c4" stroke-width="1.5" fill="none" opacity=".6"/>
+</g>
+
+<!-- Destellos -->
+<g class="tw tw1"><text x="100" y="70" font-size="11" fill="#f5c842">✦</text></g>
+<g class="tw tw2"><text x="255" y="65" font-size="9" fill="#c9b0f0">✦</text></g>
+<g class="tw tw3"><text x="295" y="95" font-size="8" fill="#f7a1c4">✦</text></g>
+<g class="tw tw4"><text x="70" y="100" font-size="9" fill="#fff">✦</text></g>
+<g class="tw tw5"><text x="175" y="68" font-size="8" fill="#f5c842">✦</text></g>
+
+</svg>
+</div>
     <div class="scroll-hint">
       <div class="scroll-dot"></div>
       <div class="scroll-dot"></div>
@@ -640,7 +712,7 @@
     </div>
   </section>
 
-  <!-- ===== CARTA DIGITAL ===== -->
+  <!-- ===== CARTA DIGITAL (AHORA PRIMERO) ===== -->
   <div class="carta-wrap">
     <div class="carta-inner">
       <div class="section-tag reveal">✦ a letter for you ✦</div>
@@ -650,15 +722,15 @@
           <span class="corazon-sobre">💖</span>
           <span class="corazon-sobre">💗</span>
           <span class="icono">✉️</span>
-          <div class="sobre-texto">📩 Tap to open</div>
-          <div class="sobre-sub">💌 A Letter For You</div>
-          <div class="carta-contenido" style="display:block; position:static; transform:none; backface-visibility:visible; padding:30px; background:transparent;">
-            <div class="carta-titulo" style="color:#f7a1c4; font-size:24px;">Hey Abby 💕</div>
-            <div class="carta-texto" style="color:#e0d0f0; font-size:14px; line-height:1.9;">
+          <div class="sobre-texto">Tap to open</div>
+          <div class="sobre-sub">💌</div>
+          <div class="carta-contenido">
+            <div class="carta-titulo">Hey Abby 💕</div>
+            <div class="carta-texto">
               I made this because I wanted to thank you somehow for always being with me. I really enjoy spending time with you, whether it's playing Roblox, chatting on Instagram, or even being on a call without saying anything, just keeping me company during the night. I really like it, I feel comfortable with you, and I'm very grateful for all those good moments we've shared together. You're special to me.
             </div>
-            <div class="carta-firma" style="color:#f7a1c4; font-size:20px;">With love,</div>
-            <div class="carta-corazon" style="font-size:22px;">❤️</div>
+            <div class="carta-firma">With love</div>
+            <div class="carta-corazon">❤️</div>
           </div>
         </div>
       </div>
@@ -667,6 +739,7 @@
 
   <!-- ===== GATOS + FLORES CON IMAGEN Y FLORES ===== -->
   <div class="gato-flor-wrap">
+    <!-- Background flowers -->
     <span class="flor-fondo">🌸</span>
     <span class="flor-fondo">🌷</span>
     <span class="flor-fondo">🌻</span>
@@ -677,6 +750,7 @@
       
       <div class="gato-flor-title reveal">🎁 I have a gift for you...</div>
       
+      <!-- Image with flowers around -->
       <div class="flores-decorativas">
         <span class="flor-item">🌸</span>
         <span class="flor-item">🌷</span>
@@ -692,6 +766,7 @@
         </div>
       </div>
 
+      <!-- DECORATIVE FLOWER SEPARATOR between image and text -->
       <div class="separador-flores reveal">
         <span class="linea"></span>
         <span class="flor-sep">🌸</span>
@@ -706,16 +781,16 @@
     </div>
   </div>
 
-  <!-- ===== MENSAJE PRINCIPAL ===== -->
+  <!-- ===== MAIN MESSAGE (AHORA DESPUÉS) ===== -->
   <section class="section">
     <div class="section-tag reveal">✦ from my heart to yours ✦</div>
     <div class="msg-card reveal">
       <p class="msg-text">
-        I know I'm not the best boyfriend in the world, but I always care about you and I always have you on my mind. 
+        I know I'm not the best boyfriend, but I always care about you and I always have you on my mind. 
         You're amazing, Abby. I love you so much, more than words can say. Thank you for being you, for every moment, 
-        for every laugh, and for every dream we share. You're my favorite person.
+        for every laugh, and for every times we share, all I want to say it's thank you for being in my life. You're my favorite person.
       </p>
-      <div class="msg-sign">— with all my love, for you</div>
+      <div class="msg-sign">— From jherson :)</div>
     </div>
   </section>
 
@@ -961,8 +1036,8 @@
           }, i * 120);
         }
       } else {
-        texto.textContent = '📩 Tap to open';
-        sub.textContent = '💌 A Letter For You';
+        texto.textContent = 'Tap to open';
+        sub.textContent = '💌';
         icono.textContent = '✉️';
       }
     });
@@ -978,6 +1053,17 @@
       });
     },{ threshold:0.15 });
     revealEls.forEach(el=>obs.observe(el));
+
+    const poemaLines = document.querySelectorAll('.poema-line');
+    const poemaObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          poemaObs.unobserve(e.target);
+        }
+      });
+    },{ threshold:0.3 });
+    poemaLines.forEach(el=>poemaObs.observe(el));
 
   })();
 </script>
